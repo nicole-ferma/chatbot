@@ -1,18 +1,8 @@
 body {
-  background-color: #faf8f1;
+  background-color: #8148ba;
   color: #0a1520;
   font-family: 'Poppins', sans-serif;
-}
-
-.main, .title {
-  display: flex;
-  flex-direction: row;
-}
-
-.title img {
-  height: 5rem;
-  width: 5rem;
-  padding-right: 30px;
+  text-align: center;
 }
 
 .main div {
@@ -25,4 +15,13 @@ a {
 
 img {
   max-height: 200px;
+}
+
+.container {
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
 }

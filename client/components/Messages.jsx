@@ -1,15 +1,17 @@
 import React from 'react'
 
-function Messages() {
+function Messages(props) {
+  const { messages } = props
   return (
-    <>
-      <div className="bot-message" id='bot'>
-        <p>Placeholder text</p>
-      </div>
-      <div className="user-message" id='user'>
-        <p>Placeholder text</p>
-      </div>
-    </>
+    <section>
+      <ul>
+        {messages.map((a, i) => (
+          <li key={i}>
+            user: {a.message}
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 

@@ -1,22 +1,25 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react'
 
-import Chat from './Chat.jsx'
-import Messages from './Messages.jsx'
+import Messages from './Messages'
+import SendNewMessage from './SendNewMessage'
+
+const initialState = [{ message: '' }]
 
 function App() {
+  const [messages, setMessages] = useState(initialState)
+
+  function handleAddMessage(newMessage) {
+    setMessages([...messages, newMessage])
+  }
+
   return (
-    <div className="container">
-      <div className="title">
-        <h1>Chatbot</h1>
-      </div>
-      <div>
-        <Messages />
-      </div>
-      <div>
-        <Chat />
-      </div>
-    </div>
+    <main>
+      <h1>Chatbot</h1>
+      <h2>Messages</h2>
+      <Messages messages={messages} />
+      <h2>Send new message:</h2>
+      <SendNewMessage onAddMessage={handleAddMessage} />
+    </main>
   )
 }
 

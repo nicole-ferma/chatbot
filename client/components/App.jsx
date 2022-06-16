@@ -13,13 +13,29 @@ function App() {
   }
 
   return (
-    <main>
-      <h1>Chatbot</h1>
-      <h2>Messages</h2>
-      <Messages messages={messages} />
-      <h2>Send new message:</h2>
-      <SendNewMessage onAddMessage={handleAddMessage} />
-    </main>
+    <>
+      <div class="area" >
+        <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div >
+      <div class="context">
+        <main>
+          <Messages messages={messages} />
+          <SendNewMessage onAddMessage={handleAddMessage} />
+        </main>
+      </div>
+    </>
+
   )
 }
 

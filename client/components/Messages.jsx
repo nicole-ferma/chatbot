@@ -3,15 +3,14 @@ import React from 'react'
 function Messages(props) {
   const { messages } = props
   return (
-    <section>
-      <ul>
-        {messages.map((a, i) => (
-          <li key={i}>
-            user: {a.message}
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div class="messages">
+      <p id="bot-msg">...</p>
+      {messages.map((a, i) => (
+        <p id="user-msg" key={i}>
+          {a.message}
+        </p>
+      ))}
+    </div>
   )
 }
 

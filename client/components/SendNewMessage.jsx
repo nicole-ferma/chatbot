@@ -25,17 +25,16 @@ function SendNewMessage(props) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Message: </label>
         <input
           type="text"
           name="message"
           id="message"
           value={newMessage.message}
           onChange={handleChange}
+          placeholder="write new message"
         />
       </div>
-
-      <button type="submit">Send</button>
+      <button type="submit">send</button>
     </form>
   )
 }

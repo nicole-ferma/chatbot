@@ -10,8 +10,9 @@ function App() {
 
   function handleAddMessage(newMessage) {
     setMessages([...messages, newMessage])
+    console.log(messages)
   }
-
+  
   return (
     <>
       <div class="area" >

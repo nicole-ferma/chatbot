@@ -51,6 +51,7 @@ function App() {
 
   function handleAddMessage(newMessage) {
     setMessages([].concat(_toConsumableArray(messages), [newMessage]));
+    console.log(messages);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

@@ -2,6 +2,7 @@ import React from 'react'
 
 function Messages(props) {
   const { messages } = props
+
   return (
     <div class="messages">
       <p id="bot-msg">...</p>

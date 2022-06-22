@@ -52,22 +52,30 @@ function App() {
       messages = _useState2[0],
       setMessages = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      image = _useState4[0],
-      setImage = _useState4[1];
-
   function handleAddMessage(newMessage) {
-    setMessages([].concat(_toConsumableArray(messages), [newMessage]));
-    console.log(messages);
+    var responses = respondToMessage(newMessage);
+    console.log('responses', responses);
+    setMessages([].concat(_toConsumableArray(messages), [newMessage], _toConsumableArray(responses)));
+    console.log('messages', messages);
+  }
+
+  function respondToMessage(newMessage) {
+    var greeting = /h[ea]llo|hi|howdy/i;
+
+    if (greeting.test(newMessage.message)) {
+      return ['greetings, friend'];
+    }
+
+    return ['nothing'];
   } // experiment using fox api
+  // const [image, setImage] = useState('')
+  // useEffect(() => {
+  //   request.get('https://randomfox.ca/floof/').then(response => {
+  //     setImage(`"${response.body.image}"`)
+  //   })
+  // }, [])
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    superagent__WEBPACK_IMPORTED_MODULE_3___default().get('https://randomfox.ca/floof/').then(function (response) {
-      setImage("\"".concat(response.body.image, "\""));
-    });
-  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     "class": "area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
@@ -78,10 +86,7 @@ function App() {
     messages: messages
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SendNewMessage__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onAddMessage: handleAddMessage
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("image", {
-    src: image,
-    alt: "a fox"
-  }), console.log(image))));
+  }))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -168,6 +173,7 @@ function SendNewMessage(props) {
     setNewMessage({
       message: ''
     });
+    console.log('newMessage', newMessage);
   }
 
   function handleChange(evt) {

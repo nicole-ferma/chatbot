@@ -8,17 +8,28 @@ const initialState = [{ message: '' }]
 
 function App() {
   const [messages, setMessages] = useState(initialState)
-  const [image, setImage] = useState('')
+
   function handleAddMessage(newMessage) {
-    setMessages([...messages, newMessage])
-    console.log(messages)
+    const responses = respondToMessage(newMessage)
+    console.log('responses', responses)
+    setMessages([...messages, newMessage, ...responses])
+    console.log('messages', messages)
+  }
+
+  function respondToMessage(newMessage) {
+    const greeting = /h[ea]llo|hi|howdy/i
+    if(greeting.test(newMessage.message)) {
+      return ['greetings, friend']
+    }
+    return ['nothing']
   }
   // experiment using fox api
-  useEffect(() => {
-    request.get('https://randomfox.ca/floof/').then(response => {
-      setImage(`"${response.body.image}"`)
-    })
-  }, [])
+  // const [image, setImage] = useState('')
+  // useEffect(() => {
+  //   request.get('https://randomfox.ca/floof/').then(response => {
+  //     setImage(`"${response.body.image}"`)
+  //   })
+  // }, [])
   
   return (
     <>
@@ -40,8 +51,8 @@ function App() {
         <main>
           <Messages messages={messages} />
           <SendNewMessage onAddMessage={handleAddMessage} />
-          <image src={image} alt="a fox"></image>
-          {console.log(image)}
+          {/* <image src={image} alt="a fox"></image> */}
+          {/* {console.log(image)} */}
         </main>
       </div>
     </>

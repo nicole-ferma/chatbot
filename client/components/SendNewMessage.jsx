@@ -13,6 +13,7 @@ function SendNewMessage(props) {
     setNewMessage({
       message: '',
     })
+    console.log('newMessage', newMessage)
   }
 
   function handleChange(evt) {

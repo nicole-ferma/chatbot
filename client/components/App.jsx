@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react'
 
-import Messages from './Messages'
+import Conversation from './Conversation'
 import SendNewMessage from './SendNewMessage'
 import request from 'superagent'
 
 const initialState = [{ message: '' }]
 
 function App() {
+  // user messages
   const [messages, setMessages] = useState(initialState)
+  // bot responses
+  const [responses, setResponses] = useState([{ response: '' }])
 
   function handleAddMessage(newMessage) {
-    const responses = respondToMessage(newMessage)
-    console.log('responses', responses)
-    setMessages([...messages, newMessage, ...responses])
+    const newResponse = respondToMessage(newMessage)
+    console.log('newResponse', newResponse)
+    setMessages([...messages, newMessage])
     console.log('messages', messages)
-  }
+    setResponses({
+      ...responses, ...newResponse
+    })
+    console.log('responses', responses)
+  } 
 
   function respondToMessage(newMessage) {
     const greeting = /h[ea]llo|hi|howdy/i
     if(greeting.test(newMessage.message)) {
-      return ['greetings, friend']
+      return [{ response: 'greetings, friend'}]
     }
     return ['nothing']
   }
@@ -49,7 +56,7 @@ function App() {
       </div >
       <div class="context">
         <main>
-          <Messages messages={messages} />
+          <Conversation messages={messages} responses={responses}/>
           <SendNewMessage onAddMessage={handleAddMessage} />
           {/* <image src={image} alt="a fox"></image> */}
           {/* {console.log(image)} */}

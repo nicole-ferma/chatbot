@@ -14,10 +14,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Messages */ "./client/components/Messages.jsx");
+/* harmony import */ var _Conversation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversation */ "./client/components/Conversation.jsx");
 /* harmony import */ var _SendNewMessage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SendNewMessage */ "./client/components/SendNewMessage.jsx");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_3__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -47,23 +53,36 @@ var initialState = [{
 }];
 
 function App() {
+  // user messages
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialState),
       _useState2 = _slicedToArray(_useState, 2),
       messages = _useState2[0],
-      setMessages = _useState2[1];
+      setMessages = _useState2[1]; // bot responses
+
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+    response: ''
+  }]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      responses = _useState4[0],
+      setResponses = _useState4[1];
 
   function handleAddMessage(newMessage) {
-    var responses = respondToMessage(newMessage);
-    console.log('responses', responses);
-    setMessages([].concat(_toConsumableArray(messages), [newMessage], _toConsumableArray(responses)));
+    var newResponse = respondToMessage(newMessage);
+    console.log('newResponse', newResponse);
+    setMessages([].concat(_toConsumableArray(messages), [newMessage]));
     console.log('messages', messages);
+    setResponses(_objectSpread(_objectSpread({}, responses), newResponse));
+    console.log('responses', responses);
   }
 
   function respondToMessage(newMessage) {
     var greeting = /h[ea]llo|hi|howdy/i;
 
     if (greeting.test(newMessage.message)) {
-      return ['greetings, friend'];
+      return [{
+        response: 'greetings, friend'
+      }];
     }
 
     return ['nothing'];
@@ -82,8 +101,9 @@ function App() {
     "class": "circles"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     "class": "context"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Messages__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    messages: messages
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Conversation__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    messages: messages,
+    responses: responses
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SendNewMessage__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onAddMessage: handleAddMessage
   }))));
@@ -93,10 +113,10 @@ function App() {
 
 /***/ }),
 
-/***/ "./client/components/Messages.jsx":
-/*!****************************************!*\
-  !*** ./client/components/Messages.jsx ***!
-  \****************************************/
+/***/ "./client/components/Conversation.jsx":
+/*!********************************************!*\
+  !*** ./client/components/Conversation.jsx ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -108,21 +128,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-function Messages(props) {
-  var messages = props.messages;
+function Conversation(props) {
+  var messages = props.messages,
+      responses = props.responses;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     "class": "messages"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "bot-msg"
-  }, "..."), messages.map(function (a, i) {
+  }, messages.map(function (a, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       id: "user-msg",
       key: i
     }, a.message);
+  }), responses.map(function (b, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      id: "bot-msg",
+      key: index
+    }, b.response);
   }));
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Messages);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
 
 /***/ }),
 

@@ -52,6 +52,7 @@ function App() {
           <li></li>
           <li></li>
           <li></li>
+          <iframe src='https://my.spline.design/interactivespherescopycopy-120b5248be6920064eb67931b58e8398/' frameborder='0' width='100%' height='100%'></iframe>
         </ul>
       </div >
       <div class="context">

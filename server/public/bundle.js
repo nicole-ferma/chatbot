@@ -99,7 +99,12 @@ function App() {
     "class": "area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     "class": "circles"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("iframe", {
+    src: "https://my.spline.design/interactivespherescopycopy-120b5248be6920064eb67931b58e8398/",
+    frameborder: "0",
+    width: "100%",
+    height: "100%"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     "class": "context"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Conversation__WEBPACK_IMPORTED_MODULE_1__["default"], {
     messages: messages,
@@ -138,11 +143,6 @@ function Conversation(props) {
       id: "user-msg",
       key: i
     }, a.message);
-  }), responses.map(function (b, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-      id: "bot-msg",
-      key: index
-    }, b.response);
   }));
 }
 

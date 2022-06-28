@@ -4,7 +4,7 @@ function Conversation(props) {
   const { messages, responses } = props
 
   return (
-    <div class="messages">
+    <div className="messages">
       {messages.map((a, i) => (
         <p id="user-msg" key={i}>
           {a.message}

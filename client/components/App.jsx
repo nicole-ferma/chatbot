@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react'
 
+import Circles from './Circles'
 import Conversation from './Conversation'
 import SendNewMessage from './SendNewMessage'
-import request from 'superagent'
 
 const initialState = [{ message: '' }]
 
 function App() {
   // user messages
   const [messages, setMessages] = useState(initialState)
+  // const [newMessage, setNewMessage] = useState('')
   // bot responses
   const [responses, setResponses] = useState([{ response: '' }])
 
   function handleAddMessage(newMessage) {
-    const newResponse = respondToMessage(newMessage)
+    const newResponse = respondToMessage(newMessage)[0].response
     console.log('newResponse', newResponse)
+    // console.log('potato', newResponse[0].response)
+    // setNewMessage(newMessage.message)
+    // console.log('pineapple', newMessage)
     setMessages([...messages, newMessage])
     console.log('messages', messages)
     setResponses({
@@ -30,37 +34,16 @@ function App() {
     }
     return ['nothing']
   }
-  // experiment using fox api
-  // const [image, setImage] = useState('')
-  // useEffect(() => {
-  //   request.get('https://randomfox.ca/floof/').then(response => {
-  //     setImage(`"${response.body.image}"`)
-  //   })
-  // }, [])
   
   return (
     <>
-      <div class="area" >
-        <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <iframe src='https://my.spline.design/interactivespherescopycopy-120b5248be6920064eb67931b58e8398/' frameborder='0' width='100%' height='100%'></iframe>
-        </ul>
+      <div className="area" >
+        <Circles />
       </div >
-      <div class="context">
+      <div className="context">
         <main>
-          <Conversation messages={messages} responses={responses}/>
+          <Conversation messages={messages} />
           <SendNewMessage onAddMessage={handleAddMessage} />
-          {/* <image src={image} alt="a fox"></image> */}
-          {/* {console.log(image)} */}
         </main>
       </div>
     </>

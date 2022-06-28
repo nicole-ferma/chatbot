@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+
+import { addMessage } from '../actions/index.js'
 
 function SendNewMessage(props) {
-  const [newMessage, setNewMessage] = useState('')
+  // user messages
+  const messages = useSelector(state => state.messages)
 
   function handleSubmit(evt) {
     evt.preventDefault()
 
-    props.onAddMessage(newMessage)
-
+    dispatch(addMessage(newMessage))
     setNewMessage('')
     console.log('newMessage', newMessage)
   }

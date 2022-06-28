@@ -37,7 +37,7 @@ function App() {
       </div >
       <div className="context">
         <main>
-          <Conversation messages={messages} />
+          <Conversation messages={messages} responses={responses} />
           <SendNewMessage onAddMessage={handleAddMessage} />
         </main>
       </div>

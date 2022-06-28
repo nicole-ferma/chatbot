@@ -79,7 +79,8 @@ function App() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Circles__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "context"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Conversation__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    messages: messages
+    messages: messages,
+    responses: responses
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SendNewMessage__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onAddMessage: handleAddMessage
   }))));
@@ -137,6 +138,11 @@ function Conversation(props) {
       id: "user-msg",
       key: i
     }, message);
+  }), responses.map(function (response, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      id: "bot-msg",
+      key: i
+    }, response);
   }));
 }
 

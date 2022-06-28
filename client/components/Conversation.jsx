@@ -10,6 +10,11 @@ function Conversation(props) {
           {message}
         </p>
       ))}
+      {responses.map((response, i) => (
+        <p id="bot-msg" key={i}>
+          {response}
+        </p>
+      ))}
     </div>
   )
 }

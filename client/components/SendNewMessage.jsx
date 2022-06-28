@@ -1,26 +1,19 @@
 import React, { useState } from 'react'
 
 function SendNewMessage(props) {
-  const [newMessage, setNewMessage] = useState({
-    message: '',
-  })
+  const [newMessage, setNewMessage] = useState('')
 
   function handleSubmit(evt) {
     evt.preventDefault()
 
     props.onAddMessage(newMessage)
 
-    setNewMessage({
-      message: '',
-    })
+    setNewMessage('')
     console.log('newMessage', newMessage)
   }
 
   function handleChange(evt) {
-    setNewMessage({
-      ...newMessage,
-      [evt.target.name]: evt.target.value,
-    })
+    setNewMessage( evt.target.value)
   }
 
   return (
@@ -30,7 +23,7 @@ function SendNewMessage(props) {
           type="text"
           name="message"
           id="message"
-          value={newMessage.message}
+          value={newMessage}
           onChange={handleChange}
           placeholder="write new message"
         />

@@ -4,33 +4,28 @@ import Circles from './Circles'
 import Conversation from './Conversation'
 import SendNewMessage from './SendNewMessage'
 
-const initialState = [{ message: '' }]
-
 function App() {
   // user messages
-  const [messages, setMessages] = useState(initialState)
-  // const [newMessage, setNewMessage] = useState('')
+  const [messages, setMessages] = useState([])
+
   // bot responses
-  const [responses, setResponses] = useState([{ response: '' }])
+  const [responses, setResponses] = useState([])
 
   function handleAddMessage(newMessage) {
-    const newResponse = respondToMessage(newMessage)[0].response
-    console.log('newResponse', newResponse)
-    // console.log('potato', newResponse[0].response)
-    // setNewMessage(newMessage.message)
-    // console.log('pineapple', newMessage)
+    const newResponse = respondToMessage(newMessage)[0]
+    
     setMessages([...messages, newMessage])
+    setResponses([...responses, newResponse])
+
     console.log('messages', messages)
-    setResponses({
-      ...responses, ...newResponse
-    })
+    console.log('newResponse', newResponse)
     console.log('responses', responses)
   } 
 
   function respondToMessage(newMessage) {
     const greeting = /h[ea]llo|hi|howdy/i
-    if(greeting.test(newMessage.message)) {
-      return [{ response: 'greetings, friend'}]
+    if(greeting.test(newMessage)) {
+      return ['greetings, friend']
     }
     return ['nothing']
   }

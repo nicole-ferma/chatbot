@@ -17,12 +17,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Circles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Circles */ "./client/components/Circles.jsx");
 /* harmony import */ var _Conversation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversation */ "./client/components/Conversation.jsx");
 /* harmony import */ var _SendNewMessage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SendNewMessage */ "./client/components/SendNewMessage.jsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -47,45 +41,34 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var initialState = [{
-  message: ''
-}];
 
 function App() {
   // user messages
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialState),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       messages = _useState2[0],
-      setMessages = _useState2[1]; // const [newMessage, setNewMessage] = useState('')
-  // bot responses
+      setMessages = _useState2[1]; // bot responses
 
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
-    response: ''
-  }]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
       responses = _useState4[0],
       setResponses = _useState4[1];
 
   function handleAddMessage(newMessage) {
-    var newResponse = respondToMessage(newMessage)[0].response;
-    console.log('newResponse', newResponse); // console.log('potato', newResponse[0].response)
-    // setNewMessage(newMessage.message)
-    // console.log('pineapple', newMessage)
-
+    var newResponse = respondToMessage(newMessage)[0];
     setMessages([].concat(_toConsumableArray(messages), [newMessage]));
+    setResponses([].concat(_toConsumableArray(responses), [newResponse]));
     console.log('messages', messages);
-    setResponses(_objectSpread(_objectSpread({}, responses), newResponse));
+    console.log('newResponse', newResponse);
     console.log('responses', responses);
   }
 
   function respondToMessage(newMessage) {
     var greeting = /h[ea]llo|hi|howdy/i;
 
-    if (greeting.test(newMessage.message)) {
-      return [{
-        response: 'greetings, friend'
-      }];
+    if (greeting.test(newMessage)) {
+      return ['greetings, friend'];
     }
 
     return ['nothing'];
@@ -149,11 +132,11 @@ function Conversation(props) {
       responses = props.responses;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
-  }, messages.map(function (a, i) {
+  }, messages.map(function (message, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       id: "user-msg",
       key: i
-    }, a.message);
+    }, message);
   }));
 }
 
@@ -173,12 +156,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -194,9 +171,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function SendNewMessage(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    message: ''
-  }),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       newMessage = _useState2[0],
       setNewMessage = _useState2[1];
@@ -204,14 +179,12 @@ function SendNewMessage(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onAddMessage(newMessage);
-    setNewMessage({
-      message: ''
-    });
+    setNewMessage('');
     console.log('newMessage', newMessage);
   }
 
   function handleChange(evt) {
-    setNewMessage(_objectSpread(_objectSpread({}, newMessage), {}, _defineProperty({}, evt.target.name, evt.target.value)));
+    setNewMessage(evt.target.value);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
@@ -220,7 +193,7 @@ function SendNewMessage(props) {
     type: "text",
     name: "message",
     id: "message",
-    value: newMessage.message,
+    value: newMessage,
     onChange: handleChange,
     placeholder: "write new message"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {

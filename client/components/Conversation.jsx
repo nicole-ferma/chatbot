@@ -5,16 +5,11 @@ function Conversation(props) {
 
   return (
     <div className="messages">
-      {messages.map((a, i) => (
+      {messages.map((message, i) => (
         <p id="user-msg" key={i}>
-          {a.message}
+          {message}
         </p>
       ))}
-      {/* {responses.map((b, index) => (
-        <p id="bot-msg" key={index}>
-          {b.response}
-        </p>
-      ))} */}
     </div>
   )
 }

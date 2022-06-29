@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addMessage } from '../actions/index.js'
+import { addMessage, addResponse } from '../actions/index.js'
 
 function SendNewMessage(props) {
   const dispatch = useDispatch()
@@ -11,11 +11,19 @@ function SendNewMessage(props) {
   function handleSubmit(evt) {
     evt.preventDefault()
     dispatch(addMessage(newMessage))
-    setNewMessage('')
+    respondToMessage(newMessage)
   }
 
   function handleChange(evt) {
     setNewMessage( evt.target.value)
+  }
+
+  function respondToMessage(newMessage) {
+    const greeting = /h[ea]llo|hi|howdy/i
+    if(greeting.test(newMessage)) {
+      dispatch(addResponse('greetings, friend'))
+    }
+    return 
   }
 
   return (

@@ -10,12 +10,19 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addMessage": () => (/* binding */ addMessage)
+/* harmony export */   "addMessage": () => (/* binding */ addMessage),
+/* harmony export */   "addResponse": () => (/* binding */ addResponse)
 /* harmony export */ });
 function addMessage(message) {
   return {
     type: 'ADD_MESSAGE',
     payload: message
+  };
+}
+function addResponse(response) {
+  return {
+    type: 'ADD_RESPONSE',
+    payload: response
   };
 }
 
@@ -95,12 +102,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function Conversation() {
   const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
+  const responses = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.responses);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
   }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     id: "user-msg",
     key: i
-  }, message)));
+  }, message)), responses.map((response, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    id: "bot-msg",
+    key: i
+  }, response)));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
@@ -132,11 +143,21 @@ function SendNewMessage(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage));
-    setNewMessage('');
+    respondToMessage(newMessage);
   }
 
   function handleChange(evt) {
     setNewMessage(evt.target.value);
+  }
+
+  function respondToMessage(newMessage) {
+    const greeting = /h[ea]llo|hi|howdy/i;
+
+    if (greeting.test(newMessage)) {
+      dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)('greetings, friend'));
+    }
+
+    return;
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
@@ -167,12 +188,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./client/reducers/messages.js");
+/* harmony import */ var _responses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./responses */ "./client/reducers/responses.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"]
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
+  responses: _responses__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
@@ -205,6 +229,37 @@ const messages = function () {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (messages);
+
+/***/ }),
+
+/***/ "./client/reducers/responses.js":
+/*!**************************************!*\
+  !*** ./client/reducers/responses.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const responses = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+  const {
+    type,
+    payload
+  } = action;
+
+  switch (type) {
+    case 'ADD_RESPONSE':
+      return [...state, payload];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (responses);
 
 /***/ }),
 

@@ -4,3 +4,10 @@ export function addMessage(message) {
     payload: message,
   }
 }
+
+export function addResponse(response) {
+  return {
+    type: 'ADD_RESPONSE',
+    payload: response,
+  }
+}

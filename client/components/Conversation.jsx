@@ -1,7 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-function Conversation(props) {
-  const { messages, responses } = props
+function Conversation() {
+  const messages = useSelector(state => state.messages)
 
   return (
     <div className="messages">
@@ -10,11 +11,11 @@ function Conversation(props) {
           {message}
         </p>
       ))}
-      {responses.map((response, i) => (
+      {/* {responses.map((response, i) => (
         <p id="bot-msg" key={i}>
           {response}
         </p>
-      ))}
+      ))} */}
     </div>
   )
 }

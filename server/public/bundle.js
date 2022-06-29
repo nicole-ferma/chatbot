@@ -89,22 +89,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
-function Conversation(props) {
-  const {
-    messages,
-    responses
-  } = props;
+
+function Conversation() {
+  const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
   }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     id: "user-msg",
     key: i
-  }, message)), responses.map((response, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "bot-msg",
-    key: i
-  }, response)));
+  }, message)));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
@@ -130,14 +126,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SendNewMessage(props) {
-  // user messages
-  const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const [newMessage, setNewMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
 
   function handleSubmit(evt) {
     evt.preventDefault();
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage));
     setNewMessage('');
-    console.log('newMessage', newMessage);
   }
 
   function handleChange(evt) {
@@ -172,15 +167,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './botResponses'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages */ "./client/reducers/messages.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./client/reducers/messages.js");
 
 
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-  botResponses: Object(function webpackMissingModule() { var e = new Error("Cannot find module './botResponses'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-  messages: _messages__WEBPACK_IMPORTED_MODULE_1__["default"]
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+  messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"]
 }));
 
 /***/ }),

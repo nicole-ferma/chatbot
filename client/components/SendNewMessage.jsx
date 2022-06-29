@@ -1,26 +1,29 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { addMessage, addResponse } from '../actions/index.js'
 
 function SendNewMessage(props) {
-  const [newMessage, setNewMessage] = useState({
-    message: '',
-  })
+  const dispatch = useDispatch()
+
+  const [newMessage, setNewMessage] = useState('')
 
   function handleSubmit(evt) {
     evt.preventDefault()
-
-    props.onAddMessage(newMessage)
-
-    setNewMessage({
-      message: '',
-    })
-    console.log('newMessage', newMessage)
+    dispatch(addMessage(newMessage))
+    respondToMessage(newMessage)
   }
 
   function handleChange(evt) {
-    setNewMessage({
-      ...newMessage,
-      [evt.target.name]: evt.target.value,
-    })
+    setNewMessage( evt.target.value)
+  }
+
+  function respondToMessage(newMessage) {
+    const greeting = /h[ea]llo|hi|howdy/i
+    if(greeting.test(newMessage)) {
+      dispatch(addResponse('greetings, friend'))
+    }
+    return 
   }
 
   return (
@@ -30,7 +33,7 @@ function SendNewMessage(props) {
           type="text"
           name="message"
           id="message"
-          value={newMessage.message}
+          value={newMessage}
           onChange={handleChange}
           placeholder="write new message"
         />

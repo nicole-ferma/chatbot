@@ -103,12 +103,16 @@ __webpack_require__.r(__webpack_exports__);
 function Conversation() {
   const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
   const responses = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.responses);
+  const userMessage = document.getElementById('user-msg');
+  const botMessage = document.getElementById('bot-msg');
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    messages.map((message, i) => userMessage.innerHTML = message);
+  }, [messages]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
-  }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "user-msg",
-    key: i
-  }, message)), responses.map((response, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    id: "user-msg"
+  }), responses.map((response, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     id: "bot-msg",
     key: i
   }, response)));
@@ -160,7 +164,7 @@ function SendNewMessage(props) {
     return;
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
@@ -171,7 +175,7 @@ function SendNewMessage(props) {
     placeholder: "write new message"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "submit"
-  }, "send"));
+  }, "send")));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SendNewMessage);

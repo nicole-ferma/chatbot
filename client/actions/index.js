@@ -11,3 +11,10 @@ export function addResponse(response) {
     payload: response,
   }
 }
+
+export function chooseChat(choice) {
+  return {
+    type: 'CHOOSE_CHAT',
+    payload: choice,
+  }
+}

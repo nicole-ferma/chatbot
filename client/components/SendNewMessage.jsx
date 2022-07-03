@@ -22,24 +22,26 @@ function SendNewMessage(props) {
     const greeting = /h[ea]llo|hi|howdy/i
     if(greeting.test(newMessage)) {
       dispatch(addResponse('greetings, friend'))
-    }
+    } 
     return 
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          type="text"
-          name="message"
-          id="message"
-          value={newMessage}
-          onChange={handleChange}
-          placeholder="write new message"
-        />
-      </div>
-      <button type="submit">send</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="text"
+            name="message"
+            id="message"
+            value={newMessage}
+            onChange={handleChange}
+            placeholder="write new message"
+          />
+        </div>
+        <button type="submit">send</button>
+      </form>
+    </>
   )
 }
 

@@ -9,9 +9,7 @@ function SendNewMessage(props) {
   const dispatch = useDispatch()
 
   const [newMessage, setNewMessage] = useState('')
-
   const[response, setNewResponse] = useState('')
-  response && console.log('response from db', response.responseArray)
 
   function handleSubmit(evt) {
     evt.preventDefault()
@@ -23,19 +21,24 @@ function SendNewMessage(props) {
     setNewMessage( evt.target.value)
   }
 
+// eventually move logic to backend 
   function respondToMessage(newMessage) {
     const greeting = /h[ea]llo|hi|howdy/i
-    const randomIndex = Math.floor(Math.random() * 4)
+    const farewell = /bye|see.you|goodbye/i
+    const randomIndex = Math.floor(Math.random() * 3)
     if(greeting.test(newMessage)) {
-      response && dispatch(addResponse(JSON.parse(response.responseArray)[randomIndex]))
-    } 
+      response && dispatch(addResponse(JSON.parse(response[0].responseArray)[randomIndex]))
+    } else if (farewell.test(newMessage)) {
+      response && dispatch(addResponse(JSON.parse(response[1].responseArray)[randomIndex]))
+    }
     return 
   }
 
+  // this currently gets ALL responses from db -- refactor!!!
   useEffect(() => {
     getResponses()
       .then(response => {
-        setNewResponse(response[0])
+        setNewResponse(response)
       })
       .catch(err => {
         console.log(err)

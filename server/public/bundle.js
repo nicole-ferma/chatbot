@@ -119,7 +119,7 @@ __webpack_require__.r(__webpack_exports__);
 function Bot() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("iframe", {
     src: "https://my.spline.design/bot-49723baf83e38e763ad16f11b0a1ffb4/",
-    frameborder: "0",
+    frameBorder: "0",
     width: "100%",
     height: "100%"
   });
@@ -174,19 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 function Conversation() {
   const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
   const responses = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.responses);
-  const userMessage = document.getElementById('user-msg');
-  const botMessage = document.getElementById('bot-msg');
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    messages.map((message, i) => userMessage.innerHTML = message);
-  }, [messages]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "user-msg"
-  }), responses.map((response, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    id: "user-msg",
+    key: i
+  }, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     id: "bot-msg",
     key: i
-  }, response)));
+  }, responses[i]))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
@@ -260,7 +256,6 @@ function SendNewMessage(props) {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [newMessage, setNewMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [response, setNewResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  response && console.log('response from db', response.responseArray);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -270,22 +265,27 @@ function SendNewMessage(props) {
 
   function handleChange(evt) {
     setNewMessage(evt.target.value);
-  }
+  } // eventually move logic to backend 
+
 
   function respondToMessage(newMessage) {
     const greeting = /h[ea]llo|hi|howdy/i;
-    const randomIndex = Math.floor(Math.random() * 4);
+    const farewell = /bye|see.you|goodbye/i;
+    const randomIndex = Math.floor(Math.random() * 3);
 
     if (greeting.test(newMessage)) {
-      response && dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)(JSON.parse(response.responseArray)[randomIndex]));
+      response && dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)(JSON.parse(response[0].responseArray)[randomIndex]));
+    } else if (farewell.test(newMessage)) {
+      response && dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)(JSON.parse(response[1].responseArray)[randomIndex]));
     }
 
     return;
-  }
+  } // this currently gets ALL responses from db -- refactor!!!
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_3__.getResponses)().then(response => {
-      setNewResponse(response[0]);
+      setNewResponse(response);
     }).catch(err => {
       console.log(err);
     });

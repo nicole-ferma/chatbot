@@ -8,7 +8,7 @@
     "dev": "run-p client server",
     "webpack": "webpack --config client/webpack.config.js",
     "client": "npm run webpack -- --watch",
-    "server": "node server",
+    "server": "nodemon server",
     "test": "jest --watch --noStackTrace",
     "lint": "eslint --ext .js,.jsx .",
     "knex": "knex --knexfile server/db/knexfile.js"

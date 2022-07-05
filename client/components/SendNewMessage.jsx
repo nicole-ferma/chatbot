@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { addMessage, addResponse } from '../actions/index.js'
+import { addMessage, addResponse, getReply } from '../actions/index.js'
 
-import { getResponses } from '../apiClient.js'
+import { getResponses, getResponse } from '../apiClient.js'
 
 function SendNewMessage(props) {
   const dispatch = useDispatch()
@@ -14,36 +14,49 @@ function SendNewMessage(props) {
   function handleSubmit(evt) {
     evt.preventDefault()
     dispatch(addMessage(newMessage))
-    respondToMessage(newMessage)
+    // call thunk function with newMessage param
+    dispatch(getReply(newMessage))
   }
 
   function handleChange(evt) {
     setNewMessage( evt.target.value)
   }
 
-// eventually move logic to backend 
-  function respondToMessage(newMessage) {
-    const greeting = /h[ea]llo|hi|howdy/i
-    const farewell = /bye|see.you|goodbye/i
-    const randomIndex = Math.floor(Math.random() * 3)
-    if(greeting.test(newMessage)) {
-      response && dispatch(addResponse(JSON.parse(response[0].responseArray)[randomIndex]))
-    } else if (farewell.test(newMessage)) {
-      response && dispatch(addResponse(JSON.parse(response[1].responseArray)[randomIndex]))
-    }
-    return 
-  }
+  // useEffect(() => {
+  //   getResponse(newMessage)
+  //     .then(responseArray => {
+  //       setNewResponse(responseArray)
+  //       console.log(response)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
+
+  // function respondToMessage(newMessage) {
+  //   const greeting = /h[ea]llo|hi|howdy/i
+  //   const farewell = /bye|see.you|goodbye/i
+  //   const randomIndex = Math.floor(Math.random() * 3)
+  //   if(greeting.test(newMessage)) {
+  //     response && dispatch(addResponse(JSON.parse(response[0].responseArray)[randomIndex]))
+  //   } else if (farewell.test(newMessage)) {
+  //     response && dispatch(addResponse(JSON.parse(response[1].responseArray)[randomIndex]))
+  //   }
+  //   return 
+  // }
 
   // this currently gets ALL responses from db -- refactor!!!
-  useEffect(() => {
-    getResponses()
-      .then(response => {
-        setNewResponse(response)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   getResponses()
+  //     .then(response => {
+  //       setNewResponse(response)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
+
+
 
   return (
     <>

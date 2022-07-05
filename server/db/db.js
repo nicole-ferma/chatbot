@@ -4,6 +4,7 @@ const connection = require('knex')(config)
 
 module.exports = {
   getResponses,
+  getResponse,
 }
 
 function getResponses(db = connection) {
@@ -11,3 +12,20 @@ function getResponses(db = connection) {
 }
 
 // postgress requires returning params in db functions
+
+function getResponse(message, db = connection) {
+  const greeting = /h[ea]llo|hi|howdy/i
+  const farewell = /bye|see.you|goodbye/i
+  // const randomIndex = Math.floor(Math.random() * 3)
+  if (greeting.test(message)) {
+    return db('responses')
+      .select('responseArray')
+      .where({ category: 'greetings' })
+      .first()
+  } else if (farewell.test(message)) {
+    return db('responses')
+      .select('responseArray')
+      .where({ category: 'farewells' })
+      .first()
+  }
+}

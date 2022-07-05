@@ -12,8 +12,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addMessage": () => (/* binding */ addMessage),
 /* harmony export */   "addResponse": () => (/* binding */ addResponse),
-/* harmony export */   "chooseChat": () => (/* binding */ chooseChat)
+/* harmony export */   "chooseChat": () => (/* binding */ chooseChat),
+/* harmony export */   "getReply": () => (/* binding */ getReply)
 /* harmony export */ });
+/* harmony import */ var _apiClient_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apiClient.js */ "./client/apiClient.js");
+
+function chooseChat(choice) {
+  return {
+    type: 'CHOOSE_CHAT',
+    payload: choice
+  };
+}
 function addMessage(message) {
   return {
     type: 'ADD_MESSAGE',
@@ -25,11 +34,21 @@ function addResponse(response) {
     type: 'ADD_RESPONSE',
     payload: response
   };
-}
-function chooseChat(choice) {
-  return {
-    type: 'CHOOSE_CHAT',
-    payload: choice
+} // export function fetchFruits() {
+//   return (dispatch) => {
+//     return getFruits().then((fruits) => {
+//       dispatch(setFruits(fruits))
+//       return null
+//     })
+//   }
+// }
+// time to thunk!
+
+function getReply(message) {
+  return dispatch => {
+    return (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_0__.getResponse)(message).then(reply => {
+      dispatch(addResponse(reply));
+    });
   };
 }
 
@@ -44,6 +63,7 @@ function chooseChat(choice) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getResponse": () => (/* binding */ getResponse),
 /* harmony export */   "getResponses": () => (/* binding */ getResponses)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -51,10 +71,16 @@ __webpack_require__.r(__webpack_exports__);
 // superagent is an http client
 // it calls the server and routes with specific requests
 
-const responsesURL = '/api/v1/responses/';
+const responsesURL = '/api/v1/responses/'; // these functions call the routes
+
 function getResponses() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(responsesURL).then(response => {
     // response.body is the JSON data from our server
+    return response.body;
+  });
+}
+function getResponse(message) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/responses/${message}`).then(response => {
     return response.body;
   });
 }
@@ -259,37 +285,46 @@ function SendNewMessage(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage));
-    respondToMessage(newMessage);
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage)); // call thunk function with newMessage param
+
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.getReply)(newMessage));
   }
 
   function handleChange(evt) {
     setNewMessage(evt.target.value);
-  } // eventually move logic to backend 
+  } // useEffect(() => {
+  //   getResponse(newMessage)
+  //     .then(responseArray => {
+  //       setNewResponse(responseArray)
+  //       console.log(response)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
+  // function respondToMessage(newMessage) {
+  //   const greeting = /h[ea]llo|hi|howdy/i
+  //   const farewell = /bye|see.you|goodbye/i
+  //   const randomIndex = Math.floor(Math.random() * 3)
+  //   if(greeting.test(newMessage)) {
+  //     response && dispatch(addResponse(JSON.parse(response[0].responseArray)[randomIndex]))
+  //   } else if (farewell.test(newMessage)) {
+  //     response && dispatch(addResponse(JSON.parse(response[1].responseArray)[randomIndex]))
+  //   }
+  //   return 
+  // }
+  // this currently gets ALL responses from db -- refactor!!!
+  // useEffect(() => {
+  //   getResponses()
+  //     .then(response => {
+  //       setNewResponse(response)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
 
 
-  function respondToMessage(newMessage) {
-    const greeting = /h[ea]llo|hi|howdy/i;
-    const farewell = /bye|see.you|goodbye/i;
-    const randomIndex = Math.floor(Math.random() * 3);
-
-    if (greeting.test(newMessage)) {
-      response && dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)(JSON.parse(response[0].responseArray)[randomIndex]));
-    } else if (farewell.test(newMessage)) {
-      response && dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addResponse)(JSON.parse(response[1].responseArray)[randomIndex]));
-    }
-
-    return;
-  } // this currently gets ALL responses from db -- refactor!!!
-
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_3__.getResponses)().then(response => {
-      setNewResponse(response);
-    }).catch(err => {
-      console.log(err);
-    });
-  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {

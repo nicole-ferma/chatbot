@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import Bot from './Bot'
+import Form from './Form'
 
 import { chooseChat } from '../actions/index.js'
 
@@ -21,6 +22,7 @@ function Home() {
       <div className="context">
         <main>
           <button onClick={handleClick}>Chat</button>
+          <Form />
         </main>
       </div>
     </>

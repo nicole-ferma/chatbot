@@ -3,8 +3,13 @@ const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
+  createUser,
   getResponses,
   getResponse,
+}
+
+function createUser(name) {
+  return dbConn('user').insert({ name })
 }
 
 function getResponses(db = connection) {
@@ -12,7 +17,6 @@ function getResponses(db = connection) {
 }
 
 // postgress requires returning params in db functions
-
 function getResponse(message, db = connection) {
   const greeting = /h[ea]llo|hi|howdy/i
   const farewell = /bye|see.you|goodbye/i

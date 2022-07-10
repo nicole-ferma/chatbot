@@ -9,7 +9,7 @@ module.exports = {
 }
 
 function addUser(name, db = connection) {
-  return db('user').insert({ name })
+  return db('user').update({ name }).where({ id: 1 })
 }
 
 function getResponses(db = connection) {

@@ -34,15 +34,7 @@ function addResponse(response) {
     type: 'ADD_RESPONSE',
     payload: response
   };
-} // export function fetchFruits() {
-//   return (dispatch) => {
-//     return getFruits().then((fruits) => {
-//       dispatch(setFruits(fruits))
-//       return null
-//     })
-//   }
-// }
-// time to thunk!
+} // time to thunk!
 
 function getReply(message) {
   return dispatch => {
@@ -63,6 +55,7 @@ function getReply(message) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createUser": () => (/* binding */ createUser),
 /* harmony export */   "getResponse": () => (/* binding */ getResponse),
 /* harmony export */   "getResponses": () => (/* binding */ getResponses)
 /* harmony export */ });
@@ -82,6 +75,15 @@ function getResponses() {
 function getResponse(message) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/responses/${message}`).then(response => {
     return response.body;
+  });
+}
+function createUser(name) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/add`).send({
+    name
+  }).then(() => {
+    return;
+  }).catch(() => {
+    throw new Error('server error');
   });
 }
 
@@ -231,16 +233,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Bot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Bot */ "./client/components/Bot.jsx");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/index.js */ "./client/actions/index.js");
+/* harmony import */ var _apiClient_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apiClient.js */ "./client/apiClient.js");
+
 
 
 
 
 
 function Home() {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(); // function handleClick(event) {
+  //   event.preventDefault()
+  //   dispatch(chooseChat('chat'))
+  // }
 
-  function handleClick(event) {
-    event.preventDefault();
+  const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+
+  function handleChange(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name);
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat'));
   }
 
@@ -248,9 +262,21 @@ function Home() {
     className: "area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Bot__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "context"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleClick
-  }, "Chat"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "user"
+  }, "What is your name?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    name: "user",
+    id: "user",
+    value: name,
+    onChange: handleChange,
+    placeholder: "friend",
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit"
+  }, "Chat")))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);

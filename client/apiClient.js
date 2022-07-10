@@ -17,3 +17,15 @@ export function getResponse(message) {
     return response.body
   })
 }
+
+export function createUser(name) {
+  return request
+    .post(`api/v1/user/add`)
+    .send({ name })
+    .then(() => {
+      return
+    })
+    .catch(() => {
+      throw new Error('server error')
+    })
+}

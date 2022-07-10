@@ -19,11 +19,12 @@ export function getResponse(message) {
 }
 
 export function createUser(name) {
+  console.log('inside api name:', name)
   return request
-    .post(`api/v1/user/create`)
-    .send(name)
-    .then((res) => {
-      return res.body
+    .post(`api/v1/user/add`)
+    .send({ name })
+    .then(() => {
+      return
     })
     .catch(() => {
       throw new Error('server error')

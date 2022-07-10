@@ -5,14 +5,13 @@ import { createUser } from '../apiClient.js'
 function Form() {
   const [name, setName] = useState('')
 
+  function handleChange(evt) {
+    setName( evt.target.value)
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault()
     createUser(name)
-  }
-
-  function handleChange(evt) {
-    setName( evt.target.value)
-    console.log(name)
   }
 
   return (

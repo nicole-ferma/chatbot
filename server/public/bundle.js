@@ -34,15 +34,7 @@ function addResponse(response) {
     type: 'ADD_RESPONSE',
     payload: response
   };
-} // export function fetchFruits() {
-//   return (dispatch) => {
-//     return getFruits().then((fruits) => {
-//       dispatch(setFruits(fruits))
-//       return null
-//     })
-//   }
-// }
-// time to thunk!
+} // time to thunk!
 
 function getReply(message) {
   return dispatch => {
@@ -86,8 +78,11 @@ function getResponse(message) {
   });
 }
 function createUser(name) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/create`).send(name).then(res => {
-    return res.body;
+  console.log('inside api name:', name);
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/add`).send({
+    name
+  }).then(() => {
+    return;
   }).catch(() => {
     throw new Error('server error');
   });
@@ -243,14 +238,13 @@ __webpack_require__.r(__webpack_exports__);
 function Form() {
   const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
 
+  function handleChange(evt) {
+    setName(evt.target.value);
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_1__.createUser)(name);
-  }
-
-  function handleChange(evt) {
-    setName(evt.target.value);
-    console.log(name);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {

@@ -3,13 +3,13 @@ const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
-  createUser,
+  addUser,
   getResponses,
   getResponse,
 }
 
-function createUser(name) {
-  return dbConn('user').insert({ name })
+function addUser(name, db = connection) {
+  return db('user').insert({ name })
 }
 
 function getResponses(db = connection) {

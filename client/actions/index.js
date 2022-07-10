@@ -21,15 +21,6 @@ export function addResponse(response) {
   }
 }
 
-// export function fetchFruits() {
-//   return (dispatch) => {
-//     return getFruits().then((fruits) => {
-//       dispatch(setFruits(fruits))
-//       return null
-//     })
-//   }
-// }
-
 // time to thunk!
 export function getReply(message) {
   return (dispatch) => {

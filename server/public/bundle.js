@@ -292,38 +292,7 @@ function SendNewMessage(props) {
 
   function handleChange(evt) {
     setNewMessage(evt.target.value);
-  } // useEffect(() => {
-  //   getResponse(newMessage)
-  //     .then(responseArray => {
-  //       setNewResponse(responseArray)
-  //       console.log(response)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }, [])
-  // function respondToMessage(newMessage) {
-  //   const greeting = /h[ea]llo|hi|howdy/i
-  //   const farewell = /bye|see.you|goodbye/i
-  //   const randomIndex = Math.floor(Math.random() * 3)
-  //   if(greeting.test(newMessage)) {
-  //     response && dispatch(addResponse(JSON.parse(response[0].responseArray)[randomIndex]))
-  //   } else if (farewell.test(newMessage)) {
-  //     response && dispatch(addResponse(JSON.parse(response[1].responseArray)[randomIndex]))
-  //   }
-  //   return 
-  // }
-  // this currently gets ALL responses from db -- refactor!!!
-  // useEffect(() => {
-  //   getResponses()
-  //     .then(response => {
-  //       setNewResponse(response)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }, [])
-
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit

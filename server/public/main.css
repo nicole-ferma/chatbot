@@ -207,3 +207,21 @@ img {
       border-radius: 50%;
   }
 }
+
+@media (min-width: 320px) {
+  body {
+    color: pink
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    color: #4825C7
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    color: #fff
+  }
+}

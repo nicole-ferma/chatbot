@@ -63,6 +63,7 @@ function getReply(message) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createUser": () => (/* binding */ createUser),
 /* harmony export */   "getResponse": () => (/* binding */ getResponse),
 /* harmony export */   "getResponses": () => (/* binding */ getResponses)
 /* harmony export */ });
@@ -82,6 +83,13 @@ function getResponses() {
 function getResponse(message) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/responses/${message}`).then(response => {
     return response.body;
+  });
+}
+function createUser(name) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/create`).send(name).then(res => {
+    return res.body;
+  }).catch(() => {
+    throw new Error('server error');
   });
 }
 
@@ -228,21 +236,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _apiClient_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apiClient.js */ "./client/apiClient.js");
 
 
 
 function Form() {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    forHTML: "name"
-  }, "Hello! What is your name?: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_1__.createUser)(name);
+  }
+
+  function handleChange(evt) {
+    setName(evt.target.value);
+    console.log(name);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "user"
+  }, "What is your name?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
-    name: "name",
-    id: "name",
+    name: "user",
+    id: "user",
     value: name,
-    placeholder: "name"
+    onChange: handleChange,
+    placeholder: "friend"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "submit"
   }, "send")));

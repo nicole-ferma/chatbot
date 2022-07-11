@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { addMessage, addResponse, getReply } from '../actions/index.js'
+import { addMessage, getReply } from '../actions/index.js'
 
-import { getResponses, getResponse } from '../apiClient.js'
 
-function SendNewMessage(props) {
+function SendNewMessage() {
   const dispatch = useDispatch()
 
   const [newMessage, setNewMessage] = useState('')
-  const[response, setNewResponse] = useState('')
 
   function handleSubmit(evt) {
     evt.preventDefault()

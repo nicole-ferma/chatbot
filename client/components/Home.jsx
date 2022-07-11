@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Bot from './Bot'
 
 import { chooseChat } from '../actions/index.js'
-import { createUser, personaliseReply } from '../apiClient.js'
+import { createVisitor, personaliseReply } from '../apiClient.js'
 function Home() {  
   const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ function Home() {
     evt.preventDefault()
     dispatch(chooseChat('chat'))
     // adds user name into db
-    createUser(name)
+    createVisitor(name)
     personaliseReply(name)
   }
 

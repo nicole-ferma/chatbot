@@ -6,9 +6,9 @@ server.use(express.json())
 server.use(express.static(path.join(__dirname, 'public')))
 
 const replies = require('./routes/replies')
-const user = require('./routes/user')
+const visitors = require('./routes/visitors')
 
 server.use('/api/v1/replies', replies)
-server.use('/api/v1/user', user)
+server.use('/api/v1/visitors', visitors)
 
 module.exports = server

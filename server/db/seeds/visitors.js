@@ -1,8 +1,8 @@
 exports.seed = (knex) => {
-  return knex('user')
+  return knex('visitors')
     .del()
     .then(() => {
-      return knex('user').insert([
+      return knex('visitors').insert([
         {
           id: 1,
           name: 'friend',

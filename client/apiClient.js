@@ -19,15 +19,15 @@ export function getReply(message) {
 }
 
 export function personaliseReply(name) {
-  return request.get(`api/v1/user/${name}`).then((response) => {
+  return request.get(`api/v1/visitors/${name}`).then((response) => {
     // is it ok to just return?
     return
   })
 }
 
-export function createUser(name) {
+export function createVisitor(name) {
   return request
-    .post(`api/v1/user/add`)
+    .post(`api/v1/visitors/add`)
     .send({ name })
     .then(() => {
       // is it ok to just return?
@@ -38,8 +38,8 @@ export function createUser(name) {
     })
 }
 
-export function getUser() {
-  return request.get(`api/v1/user`).then((response) => {
+export function getVisitor() {
+  return request.get(`api/v1/visitors`).then((response) => {
     return response.body
   })
 }

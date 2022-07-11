@@ -3,20 +3,20 @@ const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
-  addUser,
-  getUser,
+  addVisitor,
+  getVisitor,
   personaliseGreeting,
   personaliseFarewell,
   getReplies,
   getReply,
 }
 
-function addUser(name, db = connection) {
-  return db('user').update({ name }).where({ id: 1 })
+function addVisitor(name, db = connection) {
+  return db('visitors').insert({ name })
 }
 
-function getUser(db = connection) {
-  return db('user').select('name')
+function getVisitor(db = connection) {
+  return db('visitors').select('name')
 }
 
 function personaliseGreeting(name, db = connection) {

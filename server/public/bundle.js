@@ -55,10 +55,10 @@ function getReplyThunk(message) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createUser": () => (/* binding */ createUser),
+/* harmony export */   "createVisitor": () => (/* binding */ createVisitor),
 /* harmony export */   "getReplies": () => (/* binding */ getReplies),
 /* harmony export */   "getReply": () => (/* binding */ getReply),
-/* harmony export */   "getUser": () => (/* binding */ getUser),
+/* harmony export */   "getVisitor": () => (/* binding */ getVisitor),
 /* harmony export */   "personaliseReply": () => (/* binding */ personaliseReply)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -80,13 +80,13 @@ function getReply(message) {
   });
 }
 function personaliseReply(name) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/user/${name}`).then(response => {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/visitors/${name}`).then(response => {
     // is it ok to just return?
     return;
   });
 }
-function createUser(name) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/add`).send({
+function createVisitor(name) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/visitors/add`).send({
     name
   }).then(() => {
     // is it ok to just return?
@@ -95,8 +95,8 @@ function createUser(name) {
     throw new Error('server error');
   });
 }
-function getUser() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/user`).then(response => {
+function getVisitor() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/visitors`).then(response => {
     return response.body;
   });
 }
@@ -266,7 +266,7 @@ function Home() {
     evt.preventDefault();
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat')); // adds user name into db
 
-    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name);
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createVisitor)(name);
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.personaliseReply)(name);
   }
 

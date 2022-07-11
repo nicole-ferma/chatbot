@@ -3,7 +3,7 @@ const router = express.Router()
 
 const db = require(`../db/db`)
 
-// GET /api/v1/user/:name
+// GET /api/v1/visitors/:name
 router.get('/:name', (req, res) => {
   const name = req.params.name
   return db
@@ -20,10 +20,10 @@ router.get('/:name', (req, res) => {
     })
 })
 
-// POST /api/v1/user/add
+// POST /api/v1/visitors/add
 router.post('/add', (req, res) => {
   const name = req.body.name
-  db.addUser(name)
+  db.addVisitor(name)
     .then((name) => {
       return name
     })
@@ -32,11 +32,11 @@ router.post('/add', (req, res) => {
     })
 })
 
-// GET /api/v1/user
+// GET /api/v1/visitors
 router.get(`/`, (req, res) => {
-  db.getUser()
-    .then((user) => {
-      res.json(user[0].name)
+  db.getVisitor()
+    .then((visitor) => {
+      res.json(visitor[0].name)
     })
     .catch((err) => {
       res.status(500).send(err.message)

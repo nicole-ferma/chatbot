@@ -18,11 +18,18 @@ export function getResponse(message) {
   })
 }
 
+export function personaliseGreeting(name) {
+  return request.get(`api/v1/user/${name}`).then((response) => {
+    // is it ok to just return?
+    return
+  })
+}
 export function createUser(name) {
   return request
     .post(`api/v1/user/add`)
     .send({ name })
     .then(() => {
+      // is it ok to just return?
       return
     })
     .catch(() => {

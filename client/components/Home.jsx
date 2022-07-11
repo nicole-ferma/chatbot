@@ -4,14 +4,9 @@ import { useDispatch } from 'react-redux'
 import Bot from './Bot'
 
 import { chooseChat } from '../actions/index.js'
-import { createUser } from '../apiClient.js'
+import { createUser, personaliseGreeting } from '../apiClient.js'
 function Home() {  
   const dispatch = useDispatch()
-
-  // function handleClick(event) {
-  //   event.preventDefault()
-  //   dispatch(chooseChat('chat'))
-  // }
 
   const [name, setName] = useState('')
 
@@ -22,6 +17,8 @@ function Home() {
   function handleSubmit(evt) {
     evt.preventDefault()
     createUser(name)
+    // this is currently calling personaliseGreeting w local name state. Would it be better to read from user name db?
+    personaliseGreeting(name)
     dispatch(chooseChat('chat'))
   }
 

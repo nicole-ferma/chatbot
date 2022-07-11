@@ -3,6 +3,17 @@ const router = express.Router()
 
 const db = require(`../db/db`)
 
+router.get('/:name', (req, res) => {
+  const name = req.params.name
+  db.personaliseGreeting(name)
+    .then(() => {
+      return
+    })
+    .catch(() => {
+      res.status(500).send('Database Error')
+    })
+})
+
 // POST /api/v1/user/add
 router.post('/add', (req, res) => {
   const name = req.body.name

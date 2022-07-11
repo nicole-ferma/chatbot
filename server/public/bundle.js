@@ -58,7 +58,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createUser": () => (/* binding */ createUser),
 /* harmony export */   "getResponse": () => (/* binding */ getResponse),
 /* harmony export */   "getResponses": () => (/* binding */ getResponses),
-/* harmony export */   "getUser": () => (/* binding */ getUser)
+/* harmony export */   "getUser": () => (/* binding */ getUser),
+/* harmony export */   "personaliseGreeting": () => (/* binding */ personaliseGreeting)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
@@ -78,10 +79,17 @@ function getResponse(message) {
     return response.body;
   });
 }
+function personaliseGreeting(name) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/user/${name}`).then(response => {
+    // is it ok to just return?
+    return;
+  });
+}
 function createUser(name) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/user/add`).send({
     name
   }).then(() => {
+    // is it ok to just return?
     return;
   }).catch(() => {
     throw new Error('server error');
@@ -247,11 +255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Home() {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(); // function handleClick(event) {
-  //   event.preventDefault()
-  //   dispatch(chooseChat('chat'))
-  // }
-
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
 
   function handleChange(evt) {
@@ -260,7 +264,9 @@ function Home() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name);
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name); // this is currently calling personaliseGreeting w local name state. Would it be better to read from user name db?
+
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.personaliseGreeting)(name);
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat'));
   }
 
@@ -304,16 +310,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./client/actions/index.js");
-/* harmony import */ var _apiClient_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../apiClient.js */ "./client/apiClient.js");
 
 
 
 
-
-function SendNewMessage(props) {
+function SendNewMessage() {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [newMessage, setNewMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [response, setNewResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
 
   function handleSubmit(evt) {
     evt.preventDefault();

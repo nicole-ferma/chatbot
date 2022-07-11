@@ -61,5 +61,10 @@ function getReply(message, db = connection) {
       .select('repliesArray')
       .where({ category: 'farewells' })
       .first()
+  } else {
+    return db('replies')
+      .select('repliesArray')
+      .where({ category: 'unknown' })
+      .first()
   }
 }

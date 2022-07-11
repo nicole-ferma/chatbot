@@ -17,6 +17,15 @@ exports.seed = (knex) => {
             'so long',
           ]),
         },
+        {
+          id: 3,
+          category: 'unknown',
+          repliesArray: JSON.stringify([
+            'pardon me?',
+            `sorry, I don't understand`,
+            'what do you mean?',
+          ]),
+        },
       ])
     })
 }

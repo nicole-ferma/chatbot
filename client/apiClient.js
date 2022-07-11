@@ -29,3 +29,9 @@ export function createUser(name) {
       throw new Error('server error')
     })
 }
+
+export function getUser() {
+  return request.get(`api/v1/user`).then((response) => {
+    return response.body
+  })
+}

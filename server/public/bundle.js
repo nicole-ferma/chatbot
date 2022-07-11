@@ -57,7 +57,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createUser": () => (/* binding */ createUser),
 /* harmony export */   "getResponse": () => (/* binding */ getResponse),
-/* harmony export */   "getResponses": () => (/* binding */ getResponses)
+/* harmony export */   "getResponses": () => (/* binding */ getResponses),
+/* harmony export */   "getUser": () => (/* binding */ getUser)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
@@ -84,6 +85,11 @@ function createUser(name) {
     return;
   }).catch(() => {
     throw new Error('server error');
+  });
+}
+function getUser() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/user`).then(response => {
+    return response.body;
   });
 }
 

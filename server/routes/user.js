@@ -15,4 +15,14 @@ router.post('/add', (req, res) => {
     })
 })
 
+router.get(`/`, (req, res) => {
+  db.getUser()
+    .then((user) => {
+      res.json(user[0].name)
+    })
+    .catch((err) => {
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router

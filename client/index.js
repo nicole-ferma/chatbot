@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -14,12 +14,13 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 
+const container = document.getElementById('app')
+const root = createRoot(container)
 document.addEventListener('DOMContentLoaded', () => {
   // App component now has access to Router's functionality
-  render(
+  root.render(
     <Provider store={store}>
       <App />
-    </Provider>,
-    document.getElementById('app')
+    </Provider>
   )
 })

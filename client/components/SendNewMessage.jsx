@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { addMessage, getReply } from '../actions/index.js'
+import { addMessage, getReplyThunk } from '../actions/index.js'
 
 
 function SendNewMessage() {
@@ -13,7 +13,7 @@ function SendNewMessage() {
     evt.preventDefault()
     dispatch(addMessage(newMessage))
     // call thunk function with newMessage param
-    dispatch(getReply(newMessage))
+    dispatch(getReplyThunk(newMessage))
   }
 
   function handleChange(evt) {

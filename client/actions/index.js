@@ -1,4 +1,4 @@
-import { getResponse } from '../apiClient.js'
+import { getReply } from '../apiClient.js'
 
 export function chooseChat(choice) {
   return {
@@ -14,18 +14,18 @@ export function addMessage(message) {
   }
 }
 
-export function addResponse(response) {
+export function addReply(reply) {
   return {
-    type: 'ADD_RESPONSE',
-    payload: response,
+    type: 'ADD_REPLY',
+    payload: reply,
   }
 }
 
 // time to thunk!
-export function getReply(message) {
+export function getReplyThunk(message) {
   return (dispatch) => {
-    return getResponse(message).then((reply) => {
-      dispatch(addResponse(reply))
+    return getReply(message).then((reply) => {
+      dispatch(addReply(reply))
     })
   }
 }

@@ -4,14 +4,14 @@ const router = express.Router()
 const db = require('../db/db')
 
 // more specific routes first!
-// GET /api/v1/responses/:message
+// GET /api/v1/replies/:message
 router.get(`/:message`, (req, res) => {
   const message = req.params.message
   const randomIndex = Math.floor(Math.random() * 3)
-  db.getResponse(message)
+  db.getReply(message)
     .then((replies) => {
-      const replyArray = JSON.parse(replies.responseArray)
-      const reply = replyArray[randomIndex]
+      const repliesArray = JSON.parse(replies.repliesArray)
+      const reply = repliesArray[randomIndex]
       res.json(reply)
     })
     .catch((err) => {
@@ -19,11 +19,11 @@ router.get(`/:message`, (req, res) => {
     })
 })
 
-// GET /api/v1/responses
+// GET /api/v1/replies
 router.get('/', (req, res) => {
-  db.getResponses()
-    .then((responses) => {
-      res.json(responses)
+  db.getReplies()
+    .then((replies) => {
+      res.json(replies)
     })
     .catch((err) => {
       res.status(500).send(err.message)

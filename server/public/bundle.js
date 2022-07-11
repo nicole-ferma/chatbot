@@ -11,9 +11,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addMessage": () => (/* binding */ addMessage),
-/* harmony export */   "addResponse": () => (/* binding */ addResponse),
+/* harmony export */   "addReply": () => (/* binding */ addReply),
 /* harmony export */   "chooseChat": () => (/* binding */ chooseChat),
-/* harmony export */   "getReply": () => (/* binding */ getReply)
+/* harmony export */   "getReplyThunk": () => (/* binding */ getReplyThunk)
 /* harmony export */ });
 /* harmony import */ var _apiClient_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apiClient.js */ "./client/apiClient.js");
 
@@ -29,17 +29,17 @@ function addMessage(message) {
     payload: message
   };
 }
-function addResponse(response) {
+function addReply(reply) {
   return {
-    type: 'ADD_RESPONSE',
-    payload: response
+    type: 'ADD_REPLY',
+    payload: reply
   };
 } // time to thunk!
 
-function getReply(message) {
+function getReplyThunk(message) {
   return dispatch => {
-    return (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_0__.getResponse)(message).then(reply => {
-      dispatch(addResponse(reply));
+    return (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_0__.getReply)(message).then(reply => {
+      dispatch(addReply(reply));
     });
   };
 }
@@ -56,8 +56,8 @@ function getReply(message) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createUser": () => (/* binding */ createUser),
-/* harmony export */   "getResponse": () => (/* binding */ getResponse),
-/* harmony export */   "getResponses": () => (/* binding */ getResponses),
+/* harmony export */   "getReplies": () => (/* binding */ getReplies),
+/* harmony export */   "getReply": () => (/* binding */ getReply),
 /* harmony export */   "getUser": () => (/* binding */ getUser),
 /* harmony export */   "personaliseReply": () => (/* binding */ personaliseReply)
 /* harmony export */ });
@@ -66,16 +66,16 @@ __webpack_require__.r(__webpack_exports__);
 // superagent is an http client
 // it calls the server and routes with specific requests
 
-const responsesURL = '/api/v1/responses/'; // these functions call the routes
+const repliesURL = '/api/v1/replies/'; // these functions call the routes
 
-function getResponses() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(responsesURL).then(response => {
+function getReplies() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(repliesURL).then(response => {
     // response.body is the JSON data from our server
     return response.body;
   });
 }
-function getResponse(message) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/responses/${message}`).then(response => {
+function getReply(message) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/replies/${message}`).then(response => {
     return response.body;
   });
 }
@@ -215,16 +215,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function Conversation() {
   const messages = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.messages);
-  const responses = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.responses);
+  const replies = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.replies);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
-  }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "user-msg",
+  }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     key: i
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    id: "user-msg"
   }, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "bot-msg",
-    key: i
-  }, responses[i]))));
+    id: "bot-msg"
+  }, replies[i]))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
@@ -322,7 +322,7 @@ function SendNewMessage() {
     evt.preventDefault();
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage)); // call thunk function with newMessage param
 
-    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.getReply)(newMessage));
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.getReplyThunk)(newMessage));
   }
 
   function handleChange(evt) {
@@ -360,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages */ "./client/reducers/messages.js");
-/* harmony import */ var _responses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./responses */ "./client/reducers/responses.js");
+/* harmony import */ var _replies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./replies */ "./client/reducers/replies.js");
 /* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu */ "./client/reducers/menu.js");
 
 
@@ -368,7 +368,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   messages: _messages__WEBPACK_IMPORTED_MODULE_0__["default"],
-  responses: _responses__WEBPACK_IMPORTED_MODULE_1__["default"],
+  replies: _replies__WEBPACK_IMPORTED_MODULE_1__["default"],
   menu: _menu__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
@@ -440,10 +440,10 @@ const messages = function () {
 
 /***/ }),
 
-/***/ "./client/reducers/responses.js":
-/*!**************************************!*\
-  !*** ./client/reducers/responses.js ***!
-  \**************************************/
+/***/ "./client/reducers/replies.js":
+/*!************************************!*\
+  !*** ./client/reducers/replies.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -451,7 +451,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const responses = function () {
+const replies = function () {
   let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   let action = arguments.length > 1 ? arguments[1] : undefined;
   const {
@@ -460,7 +460,7 @@ const responses = function () {
   } = action;
 
   switch (type) {
-    case 'ADD_RESPONSE':
+    case 'ADD_REPLY':
       return [...state, payload];
 
     default:
@@ -468,7 +468,7 @@ const responses = function () {
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (responses);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (replies);
 
 /***/ }),
 

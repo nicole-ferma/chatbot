@@ -7,8 +7,8 @@ module.exports = {
   getUser,
   personaliseGreeting,
   personaliseFarewell,
-  getResponses,
-  getResponse,
+  getReplies,
+  getReply,
 }
 
 function addUser(name, db = connection) {
@@ -20,9 +20,9 @@ function getUser(db = connection) {
 }
 
 function personaliseGreeting(name, db = connection) {
-  return db('responses')
+  return db('replies')
     .update({
-      responseArray: JSON.stringify([
+      repliesArray: JSON.stringify([
         `greetings, ${name}`,
         `howdy, ${name}`,
         `hallo, ${name}`,
@@ -32,9 +32,9 @@ function personaliseGreeting(name, db = connection) {
 }
 
 function personaliseFarewell(name, db = connection) {
-  return db('responses')
+  return db('replies')
     .update({
-      responseArray: JSON.stringify([
+      repliesArray: JSON.stringify([
         `farewell, ${name}`,
         `until next time, ${name}`,
         `so long, ${name}`,
@@ -43,22 +43,22 @@ function personaliseFarewell(name, db = connection) {
     .where({ category: 'farewells' })
 }
 
-function getResponses(db = connection) {
-  return db('responses').select()
+function getReplies(db = connection) {
+  return db('replies').select()
 }
 
-function getResponse(message, db = connection) {
+function getReply(message, db = connection) {
   const greeting = /h[ea]llo|hi|howdy/i
   const farewell = /bye|see.you|goodbye/i
   // const randomIndex = Math.floor(Math.random() * 3)
   if (greeting.test(message)) {
-    return db('responses')
-      .select('responseArray')
+    return db('replies')
+      .select('repliesArray')
       .where({ category: 'greetings' })
       .first()
   } else if (farewell.test(message)) {
-    return db('responses')
-      .select('responseArray')
+    return db('replies')
+      .select('repliesArray')
       .where({ category: 'farewells' })
       .first()
   }

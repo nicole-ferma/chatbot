@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux'
 
 function Conversation() {
   const messages = useSelector(state => state.messages)
-  const responses = useSelector(state => state.responses)
+  const replies = useSelector(state => state.replies)
 
   return (
     <div className="messages">
       {messages.map((message, i) => (
-        <>
-          <p id="user-msg" key={i}>
+        <div key={i}>
+          <p id="user-msg">
             {message}
           </p>
-          <p id="bot-msg" key={i}>
-            {responses[i]}
+          <p id="bot-msg">
+            {replies[i]}
           </p>
-        </>
+        </div>
       ))}
     </div>
   )

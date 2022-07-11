@@ -9,6 +9,9 @@ router.get('/:name', (req, res) => {
   return db
     .personaliseGreeting(name)
     .then(() => {
+      return db.personaliseFarewell(name)
+    })
+    .then(() => {
       res.sendStatus(200)
     })
     .catch((error) => {

@@ -6,6 +6,7 @@ module.exports = {
   addUser,
   getUser,
   personaliseGreeting,
+  personaliseFarewell,
   getResponses,
   getResponse,
 }
@@ -18,7 +19,6 @@ function getUser(db = connection) {
   return db('user').select('name')
 }
 
-// how to update both greetings and farewells?
 function personaliseGreeting(name, db = connection) {
   return db('responses')
     .update({
@@ -29,14 +29,18 @@ function personaliseGreeting(name, db = connection) {
       ]),
     })
     .where({ category: 'greetings' })
-  // .update({
-  //   responseArray: JSON.stringify([
-  //     `farewell, ${name}`,
-  //     `until next time, ${name}`,
-  //     `so long, ${name}`,
-  //   ]),
-  // })
-  // .where({ category: 'farewells' })
+}
+
+function personaliseFarewell(name, db = connection) {
+  return db('responses')
+    .update({
+      responseArray: JSON.stringify([
+        `farewell, ${name}`,
+        `until next time, ${name}`,
+        `so long, ${name}`,
+      ]),
+    })
+    .where({ category: 'farewells' })
 }
 
 function getResponses(db = connection) {

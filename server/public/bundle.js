@@ -59,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getResponse": () => (/* binding */ getResponse),
 /* harmony export */   "getResponses": () => (/* binding */ getResponses),
 /* harmony export */   "getUser": () => (/* binding */ getUser),
-/* harmony export */   "personaliseGreeting": () => (/* binding */ personaliseGreeting)
+/* harmony export */   "personaliseReply": () => (/* binding */ personaliseReply)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
@@ -79,7 +79,7 @@ function getResponse(message) {
     return response.body;
   });
 }
-function personaliseGreeting(name) {
+function personaliseReply(name) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/user/${name}`).then(response => {
     // is it ok to just return?
     return;
@@ -267,7 +267,7 @@ function Home() {
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat')); // adds user name into db
 
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name);
-    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.personaliseGreeting)(name);
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.personaliseReply)(name);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

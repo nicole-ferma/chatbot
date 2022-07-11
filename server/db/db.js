@@ -29,6 +29,14 @@ function personaliseGreeting(name, db = connection) {
       ]),
     })
     .where({ category: 'greetings' })
+  // .update({
+  //   responseArray: JSON.stringify([
+  //     `farewell, ${name}`,
+  //     `until next time, ${name}`,
+  //     `so long, ${name}`,
+  //   ]),
+  // })
+  // .where({ category: 'farewells' })
 }
 
 function getResponses(db = connection) {

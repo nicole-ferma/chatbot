@@ -16,10 +16,10 @@ function Home() {
 
   function handleSubmit(evt) {
     evt.preventDefault()
-    createUser(name)
-    // this is currently calling personaliseGreeting w local name state. Would it be better to read from user name db?
-    personaliseGreeting(name)
     dispatch(chooseChat('chat'))
+    // adds user name into db
+    createUser(name)
+    personaliseGreeting(name)
   }
 
   return (

@@ -3,13 +3,16 @@ const router = express.Router()
 
 const db = require(`../db/db`)
 
+// GET /api/v1/user/:name
 router.get('/:name', (req, res) => {
   const name = req.params.name
-  db.personaliseGreeting(name)
+  return db
+    .personaliseGreeting(name)
     .then(() => {
-      return
+      res.sendStatus(200)
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error.message)
       res.status(500).send('Database Error')
     })
 })
@@ -26,6 +29,7 @@ router.post('/add', (req, res) => {
     })
 })
 
+// GET /api/v1/user
 router.get(`/`, (req, res) => {
   db.getUser()
     .then((user) => {

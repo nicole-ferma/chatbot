@@ -264,10 +264,10 @@ function Home() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name); // this is currently calling personaliseGreeting w local name state. Would it be better to read from user name db?
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat')); // adds user name into db
 
+    (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.createUser)(name);
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_4__.personaliseGreeting)(name);
-    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_3__.chooseChat)('chat'));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

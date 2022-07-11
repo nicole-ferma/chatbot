@@ -14,9 +14,6 @@ function Conversation() {
           </p>
           <p id="bot-msg" key={i}>
             {responses[i]}
-            {/* { setTimeout(() => {
-              {responses[i]}
-             }, 2000)} */}
           </p>
         </>
       ))}

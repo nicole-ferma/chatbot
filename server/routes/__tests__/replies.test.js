@@ -60,13 +60,22 @@ describe('GET /api/v1/replies', () => {
 
 describe('GET /api/v1/replies/:message', () => {
   it('returns status 200 and one bot reply', () => {
-    expect.assertions(1)
+    expect.assertions(2)
     db.getReply.mockReturnValue(Promise.resolve(replyMock))
     return request(server)
-      .get(`${prefix}/hi`)
+      .get(`${prefix}/farewell`)
       .then((res) => {
         expect(res.status).toBe(200)
-        console.log(res.body)
+        expect(replyMock.repliesArray).toContain(res.body)
+      })
+  })
+  it('returns status 500 when the promise fails', () => {
+    expect.assertions(1)
+    db.getReply.mockImplementation(() => Promise.reject(new Error()))
+    return request(server)
+      .get(`${prefix}/farewell`)
+      .then((res) => {
+        expect(res.status).toBe(500)
       })
   })
 })

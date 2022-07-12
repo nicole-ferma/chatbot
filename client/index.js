@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-// import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import reducers from './reducers'
 import App from './components/App'
@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // App component now has access to Router's functionality
   root.render(
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   )
 })

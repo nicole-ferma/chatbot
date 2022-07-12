@@ -38,7 +38,7 @@ export function createVisitor(name) {
     })
 }
 
-export function getVisitor() {
+export function getVisitors() {
   return request.get(`api/v1/visitors`).then((response) => {
     return response.body
   })

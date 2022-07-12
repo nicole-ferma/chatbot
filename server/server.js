@@ -11,4 +11,8 @@ const visitors = require('./routes/visitors')
 server.use('/api/v1/replies', replies)
 server.use('/api/v1/visitors', visitors)
 
+server.get('*', (req, res) => {
+  res.sendFile(path.resolve('server/public/index.html'))
+})
+
 module.exports = server

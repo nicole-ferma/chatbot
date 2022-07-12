@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
-
-import Bot from './Bot'
+import { Link } from 'react-router-dom'
 
 import { chooseChat } from '../actions/index.js'
 import { createVisitor, personaliseReply } from '../apiClient.js'
@@ -24,9 +23,6 @@ function Home() {
 
   return (
     <>
-      <div className="area" >
-        <Bot />
-      </div >
       <div className="context">
         <main>
           <form onSubmit={handleSubmit}>
@@ -40,7 +36,7 @@ function Home() {
                 placeholder="friend"
                 required
               />
-            <button type="submit">Chat</button>
+            <button href="/chat" type="submit"><Link to ={`/chat`}>Chat</Link></button>
           </form>
         </main>
       </div>

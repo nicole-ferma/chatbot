@@ -34,9 +34,9 @@ router.post('/add', (req, res) => {
 
 // GET /api/v1/visitors
 router.get(`/`, (req, res) => {
-  db.getVisitor()
+  db.getVisitors()
     .then((visitor) => {
-      res.json(visitor[0].name)
+      res.json(visitor)
     })
     .catch((err) => {
       res.status(500).send(err.message)

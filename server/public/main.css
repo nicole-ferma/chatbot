@@ -218,7 +218,7 @@ img {
 
 @media (min-width: 320px) {
   body {
-    color: pink
+    color: #fff
   }
 }
 
@@ -230,6 +230,6 @@ img {
 
 @media (min-width: 1200px) {
   body {
-    color: pink
+    color: #FF8C00
   }
 }

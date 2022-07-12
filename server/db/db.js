@@ -4,7 +4,7 @@ const connection = require('knex')(config)
 
 module.exports = {
   addVisitor,
-  getVisitor,
+  getVisitors,
   personaliseGreeting,
   personaliseFarewell,
   getReplies,
@@ -15,8 +15,8 @@ function addVisitor(name, db = connection) {
   return db('visitors').insert({ name })
 }
 
-function getVisitor(db = connection) {
-  return db('visitors').select('name')
+function getVisitors(db = connection) {
+  return db('visitors').select()
 }
 
 function personaliseGreeting(name, db = connection) {

@@ -24,8 +24,8 @@ router.get('/:name', (req, res) => {
 router.post('/add', (req, res) => {
   const name = req.body.name
   db.addVisitor(name)
-    .then((name) => {
-      return name
+    .then(() => {
+      res.sendStatus(200)
     })
     .catch(() => {
       res.status(500).send('Database Error')

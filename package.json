@@ -6,6 +6,7 @@
   "scripts": {
     "start": "run-p webpack server",
     "dev": "run-p client server",
+    "build": "knex migrate:latest",
     "webpack": "webpack --config client/webpack.config.js",
     "client": "npm run webpack -- --watch",
     "server": "nodemon server",
@@ -68,6 +69,7 @@
   "dependencies": {
     "express": "^4.18.1",
     "knex": "^2.1.0",
+    "pg": "^8.7.3",
     "sqlite3": "^5.0.8"
   },
   "prettier": {
@@ -93,5 +95,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
+  },
+  "engines": {
+    "node": "16.x"
   }
 }

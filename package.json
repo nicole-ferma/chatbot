@@ -4,19 +4,22 @@
   "description": "a chatbot app",
   "main": "index.js",
   "scripts": {
-    "start": "run-p webpack server",
-    "dev": "run-p client server",
+    "start": "node server",
+    "dev": "run-p dev:client dev:server",
+    "dev:client": "npm run webpack -- --watch",
+    "dev:server": "nodemon --watch server server/index.js",
     "build": "run-p build:client build:server",
     "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
-    "webpack": "webpack --config client/webpack.config.js",
+    "webpack": "webpack --config ./client/webpack.config.js",
     "client": "npm run webpack -- --watch",
     "server": "nodemon server",
     "lint": "eslint --ext .js,.jsx .",
-    "knex": "knex --knexfile server/db/knexfile.js",
+    "knex": "knex --knexfile ./server/db/knexfile.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --noStackTrace --watchAll"
+    "test:watch": "jest --noStackTrace --watchAll",
+    "heroku-postbuild": "run-s knex:migrate knex:seed"
   },
   "repository": {
     "type": "git",
@@ -62,7 +65,6 @@
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
-    "superagent": "^7.1.6",
     "supertest": "^6.2.4",
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
@@ -72,7 +74,8 @@
     "express": "^4.18.1",
     "knex": "^2.1.0",
     "pg": "^8.7.3",
-    "sqlite3": "^5.0.8"
+    "sqlite3": "^5.0.8",
+    "superagent": "^7.1.6"
   },
   "prettier": {
     "semi": false,

@@ -21,7 +21,8 @@
     "test:watch": "jest --noStackTrace --watchAll",
     "heroku-postbuild": "run-s migrate seed",
     "migrate": "npm run knex -- migrate:latest",
-    "seed":"npm run knex -- seed:run"
+    "seed": "npm run knex -- seed:run",
+    "deploy": "git push heroku main:main"
   },
   "repository": {
     "type": "git",

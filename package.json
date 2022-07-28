@@ -19,7 +19,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --noStackTrace --watchAll",
-    "heroku-postbuild": "run-s knex:migrate knex:seed"
+    "heroku-postbuild": "run-s migrate seed",
+    "migrate": "npm run knex -- migrate:latest",
+    "seed":"npm run knex -- seed:run"
   },
   "repository": {
     "type": "git",

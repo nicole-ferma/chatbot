@@ -5,9 +5,6 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './Home'
 import Circles from './Circles'
 import Bot from './Bot'
-// import Conversation from './Conversation'
-// import SendNewMessage from './SendNewMessage'
-
 import Chat from './Chat'
 import Visitors from './Visitors'
 

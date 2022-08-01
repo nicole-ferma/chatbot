@@ -17,7 +17,6 @@ const store = createStore(
 const container = document.getElementById('app')
 const root = createRoot(container)
 document.addEventListener('DOMContentLoaded', () => {
-  // App component now has access to Router's functionality
   root.render(
     <Provider store={store}>
       <Router>

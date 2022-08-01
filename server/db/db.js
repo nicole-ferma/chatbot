@@ -50,7 +50,6 @@ function getReplies(db = connection) {
 function getReply(message, db = connection) {
   const greeting = /h[ea]llo|hi|howdy/i
   const farewell = /bye|see.you|goodbye/i
-  // const randomIndex = Math.floor(Math.random() * 3)
   if (greeting.test(message)) {
     return db('replies')
       .select('repliesArray')

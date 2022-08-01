@@ -81,7 +81,6 @@ function getReply(message) {
 }
 function personaliseReply(name) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`api/v1/visitors/${name}`).then(response => {
-    // is it ok to just return?
     return;
   });
 }
@@ -89,7 +88,6 @@ function createVisitor(name) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`api/v1/visitors/add`).send({
     name
   }).then(() => {
-    // is it ok to just return?
     return;
   }).catch(() => {
     throw new Error('server error');
@@ -128,8 +126,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import Conversation from './Conversation'
-// import SendNewMessage from './SendNewMessage'
 
 
 
@@ -314,13 +310,12 @@ function Home() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.chooseChat)('chat')); // adds user name into db
-
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.chooseChat)('chat'));
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_3__.createVisitor)(name);
     (0,_apiClient_js__WEBPACK_IMPORTED_MODULE_3__.personaliseReply)(name);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "context"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit
@@ -335,11 +330,10 @@ function Home() {
     placeholder: "friend",
     required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    href: "/chat",
     type: "submit"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     to: `/chat`
-  }, "Chat"))))));
+  }, "Chat")))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
@@ -397,8 +391,7 @@ function SendNewMessage() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage)); // call thunk function with newMessage param
-
+    dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.addMessage)(newMessage));
     dispatch((0,_actions_index_js__WEBPACK_IMPORTED_MODULE_2__.getReplyThunk)(newMessage));
   }
 
@@ -44667,7 +44660,6 @@ const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(_reducers__WEBP
 const container = document.getElementById('app');
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
 document.addEventListener('DOMContentLoaded', () => {
-  // App component now has access to Router's functionality
   root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
     store: store
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_App__WEBPACK_IMPORTED_MODULE_4__["default"], null))));

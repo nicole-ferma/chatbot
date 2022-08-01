@@ -10,37 +10,34 @@ function Home() {
   const [name, setName] = useState('')
 
   function handleChange(evt) {
-    setName( evt.target.value)
+    setName(evt.target.value)
   }
 
   function handleSubmit(evt) {
     evt.preventDefault()
     dispatch(chooseChat('chat'))
-    // adds user name into db
     createVisitor(name)
     personaliseReply(name)
   }
 
   return (
-    <>
-      <div className="context">
-        <main>
-          <form onSubmit={handleSubmit}>
-              <label htmlFor="user">What is your name?</label>
-              <input
-                type="text"
-                name="user"
-                id="user"
-                value={name}
-                onChange={handleChange}
-                placeholder="friend"
-                required
-              />
-            <button href="/chat" type="submit"><Link to ={`/chat`}>Chat</Link></button>
-          </form>
-        </main>
-      </div>
-    </>
+    <div className="context">
+      <main>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="user">What is your name?</label>
+            <input
+              type="text"
+              name="user"
+              id="user"
+              value={name}
+              onChange={handleChange}
+              placeholder="friend"
+              required
+            />
+          <button type="submit"><Link to ={`/chat`}>Chat</Link></button>
+        </form>
+      </main>
+    </div>
   )
 }
 

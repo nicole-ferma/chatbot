@@ -4,7 +4,6 @@ import request from 'superagent'
 const repliesURL = '/api/v1/replies/'
 
 // these functions call the routes
-
 export function getReplies() {
   return request.get(repliesURL).then((response) => {
     // response.body is the JSON data from our server
@@ -20,7 +19,6 @@ export function getReply(message) {
 
 export function personaliseReply(name) {
   return request.get(`api/v1/visitors/${name}`).then((response) => {
-    // is it ok to just return?
     return
   })
 }
@@ -30,7 +28,6 @@ export function createVisitor(name) {
     .post(`api/v1/visitors/add`)
     .send({ name })
     .then(() => {
-      // is it ok to just return?
       return
     })
     .catch(() => {

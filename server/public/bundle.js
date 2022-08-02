@@ -264,13 +264,12 @@ function Conversation() {
   const replies = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.replies);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "messages"
-  }, messages.map((message, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    key: i
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    id: "user-msg"
-  }, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    key: replies,
     id: "bot-msg"
-  }, replies[i])))));
+  }, replies), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    id: "user-msg"
+  }, messages))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Conversation);
@@ -544,7 +543,7 @@ const messages = function () {
 
   switch (type) {
     case 'ADD_MESSAGE':
-      return [...state, payload];
+      return payload;
 
     default:
       return state;
@@ -576,7 +575,7 @@ const replies = function () {
 
   switch (type) {
     case 'ADD_REPLY':
-      return [...state, payload];
+      return payload;
 
     default:
       return state;

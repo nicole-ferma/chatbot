@@ -2,7 +2,7 @@ const replies = (state = [], action) => {
   const { type, payload } = action
   switch (type) {
     case 'ADD_REPLY':
-      return [...state, payload]
+      return payload
     default:
       return state
   }

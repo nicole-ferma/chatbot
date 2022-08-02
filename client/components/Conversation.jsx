@@ -8,16 +8,14 @@ function Conversation() {
   return (
     <>
       <div className="messages">
-        {messages.map((message, i) => (
-          <div key={i}>
-            <p id="user-msg">
-              {message}
+          <div>
+            <p key={replies} id="bot-msg">
+              {replies}
             </p>
-            <p id="bot-msg">
-              {replies[i]}
+            <p id="user-msg">
+              {messages}
             </p>
           </div>
-        ))}
       </div>
     </>
   )

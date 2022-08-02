@@ -15,7 +15,7 @@ function SendNewMessage() {
   }
 
   function handleChange(evt) {
-    setNewMessage( evt.target.value)
+    setNewMessage(evt.target.value)
   }
 
   return (

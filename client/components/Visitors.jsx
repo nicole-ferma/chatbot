@@ -14,7 +14,6 @@ useEffect(() => {
     })
 }, [])
 
-console.log(visitors)
   return (
     <>
       <div className="container v">
@@ -22,7 +21,6 @@ console.log(visitors)
         <div className="messages">
           <ul>
             {visitors && visitors.map((visitor) => {
-              console.log('inside map', visitor)
               return <li key={visitor.id}>{visitor.name} </li>
             })}
           </ul>

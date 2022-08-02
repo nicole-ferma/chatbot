@@ -1,12 +1,12 @@
 body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
-  color: #FF8C00;
+  color: #FFF6D3;
   background: #4825C7;
 }
 
 h1 {
-  margin-top: 0
+  margin-top: 0;
 }
 
 .container {
@@ -23,6 +23,11 @@ h1 {
   padding-top: 30px;
 }
 
+label {
+  color: #FFF6D3;
+  margin-right: 5px;
+}
+
 input {
   margin-top: 20px;
   padding: 7px 30px;
@@ -35,14 +40,14 @@ input {
 }
 
 button {
-  margin-top: 5px;
+  margin: 5px;
   padding: 7px 30px;
   border-radius: 20px;
   border: none;
   transition: 0.5s;
-  background-image: linear-gradient(to right,#f6d365 0%, #FF8C00 51%, #f6d365 100%);
+  background-image: linear-gradient(to right, #FFF6D3 0%, #FFE47B 51%, #FFEDA6 100%);
   background-size: 200% auto;
-  color: #494949;
+  color: #5F5840;
   font: inherit;
   font-size: 15px;
 }
@@ -202,8 +207,6 @@ img {
   animation-duration: 11s;
 }
 
-/* animation keyframes by mohaiman https://codepen.io/mohaiman/pen/MQqMyo */
-
 @keyframes animate {
   0%{
       transform: translateY(0) rotate(0deg);
@@ -231,6 +234,6 @@ img {
 
 @media (min-width: 1200px) {
   body {
-    color: #FF8C00
+    color: #5F5840
   }
 }

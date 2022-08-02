@@ -2,7 +2,7 @@ const messages = (state = [], action) => {
   const { type, payload } = action
   switch (type) {
     case 'ADD_MESSAGE':
-      return [...state, payload]
+      return payload
     default:
       return state
   }

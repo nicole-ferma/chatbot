@@ -237,3 +237,17 @@ img {
     color: #5F5840
   }
 }
+
+#bot-msg {
+  width: 22ch;
+  animation: typing 2s steps(22);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
